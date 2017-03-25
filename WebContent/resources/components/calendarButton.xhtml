@@ -1,0 +1,38 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pm="http://primefaces.org/mobile"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:composite="http://java.sun.com/jsf/composite">
+
+	<composite:interface>
+		<composite:attribute name="idCalendar"
+			default="-9999" required="false" />
+		<composite:attribute name="disabled"
+			default="false" required="false" />
+		<composite:attribute name="styleClass" default="" required="false" />
+		<composite:attribute name="value" default="" required="false" />
+		<composite:attribute name="growl" default="" required="false" />
+	</composite:interface>
+
+	<composite:implementation>
+		<h:outputScript library="js" name="calendar_languaje.js" />
+		<p:calendar 
+		timeZone="Europe/Madrid"
+		locale="#{idiomaController.locale.language}"
+		id="#{cc.attrs.idCalendar}" 
+		value="#{cc.attrs.value}" 
+		mask="true" 
+		pattern="dd/MM/yyyy" 
+		disabled="#{cc.attrs.disabled}"
+		converter="#{dateConverter}"
+		styleClass="calendarButton #{cc.attrs.styleClass}"
+		showOn="button">
+		<p:ajax immediate="true"  
+ 					update="#{cc.attrs.idCalendar},#{cc.attrs.growl}"></p:ajax>
+		</p:calendar>
+	</composite:implementation>
+
+</ui:composition>

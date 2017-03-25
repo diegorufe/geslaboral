@@ -1,0 +1,94 @@
+<ui:composition template="/views/pages/layout/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:sec="http://www.springframework.org/security/tags"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ges="http://java.sun.com/jsf/composite/components"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="title">
+		<h:outputText value="#{msg['trabajador.header']}" />
+	</ui:define>
+	<ui:define name="content">
+		<div class="ui-grid ui-grid-responsive ui-fluid">
+			<div class="ui-grid-col-12">
+				<h:form id="formTrabajadores">
+					<p:panel header="Filtros"
+						styleClass="panelFiltros margin-bottom1 panelFiltros-width"
+						id="panelFiltrosJornada" toggleable="true">
+						<p:panelGrid styleClass="grid-user no-boder" columns="1"
+							layout="grid">
+							<ges:labelGenerico
+								forComponent="formTrabajadores:codigoDiv:codigoInput"
+								styleClass="font-montserrat" value="#{msg['trabajador.codigo']}" />
+							<ges:inputTextGenerico id="codigoDiv"
+								value="#{trabajadorController.filtroCodigo}" idInput="codigoInput"
+								max="10" />
+							<ges:labelGenerico
+								forComponent="formTrabajadores:nombreDiv:nombreInput"
+								styleClass="font-montserrat" value="#{msg['trabajador.nombre']}" />
+							<ges:inputTextGenerico id="nombreDiv"
+								value="#{trabajadorController.filtroNombre}" idInput="nombreInput"
+								max="50" />
+							<ges:labelGenerico
+								forComponent="formTrabajadores:ape1Div:ape1Input"
+								styleClass="font-montserrat" value="#{msg['trabajador.apellido1']}" />
+							<ges:inputTextGenerico id="ape1Div"
+								value="#{trabajadorController.filtroApellido1}" idInput="ape1Input"
+								max="50" />	
+							<ges:labelGenerico
+								forComponent="formTrabajadores:ape2Div:ape2Input"
+								styleClass="font-montserrat" value="#{msg['trabajador.apellido2']}" />
+							<ges:inputTextGenerico id="ape2Div"
+								value="#{trabajadorController.filtroApellido2}" idInput="ape2Input"
+								max="50" />		
+							<ges:buttonGenerico ajaxButtonGenerico="false"
+								valueButtonGenerico="#{msg['aplicar']}"
+								typeButtonGenerico="submit"
+								actionButtonGenerico="#{trabajadorController.aplicarFiltros}" />
+						</p:panelGrid>
+					</p:panel>
+					<table class="amb">
+						<tr>
+							<p:growl id="accionesAbmTrabajador" sticky="true" />
+							<td><ges:buttonShow
+									actionButton='#{trabajadorController.actionGoShow}'
+									updateButton="formTrabajadores:accionesAbmTrabajador" /></td>
+							<td><ges:buttonAdd
+									actionButton='#{trabajadorController.actionGoAdd}'
+									updateButton="formTrabajadores:accionesAbmTrabajador" /></td>
+							<td><ges:buttonEdit
+									actionButton='#{trabajadorController.actionGoMod}'
+									updateButton="formTrabajadores:accionesAbmTrabajador" /></td>
+							<td><ges:buttonRemove
+									actionButton='#{trabajadorController.actionGoDel}'
+									updateButton="formTrabajadores:accionesAbmTrabajador" /> <p:confirmDialog
+									id="delTrabajador" closable="true" closeOnEscape="true"
+									height="30" message="#{msg['seguro.borrar']}"
+									header="#{msg['borrar.registro']}" severity="alert"
+									widgetVar="delTrabajador">
+									<table style="margin: 0 auto !important;">
+										<tr>
+											<td><ges:buttonAccept
+													actionButton="#{trabajadorController.delModel}"
+													updateButton="formTrabajadores:accionesAbmTrabajador,formTrabajadores:delTrabajador,:formTrabajadores:trabajadores:trabajadoresTable" /></td>
+											<td><ges:buttonCancel
+													updateButton="formTrabajadores:delTrabajador"
+													onClick="PF('delTrabajador').hide()" /></td>
+										</tr>
+									</table>
+								</p:confirmDialog></td>
+						</tr>
+					</table>
+					<ges:dataTableGenerico id="trabajadores"
+						idTable="trabajadoresTable"
+						lazyTable="#{trabajadorController.lazyTable}"
+						selectionMode="single" />
+				</h:form>
+			</div>
+		</div>
+		<ui:include src="/views/pages/trabajador/abmTrabajador.xhtml"></ui:include>
+	</ui:define>
+</ui:composition>

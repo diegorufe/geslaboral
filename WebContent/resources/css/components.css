@@ -1,0 +1,84 @@
+.inputTextGenerico{
+	width: 14em !important;
+}
+.buttonEdit, .buttonAcept, .buttonRemove, .buttonCancel, .buttonAdd,
+	.buttonShow {
+	text-align: center;
+	width: 2em !important;
+	height: 2em !important;
+}
+
+.buttonEdit>.ui-button-text {
+	padding: 0 !important;
+}
+
+.buttonAcept>.ui-button-text {
+	padding: 0 !important;
+}
+
+.buttonRemove>.ui-button-text {
+	padding: 0 !important;
+}
+
+.buttonCancel>.ui-button-text {
+	padding: 0 !important;
+}
+
+.buttonAdd>.ui-button-text {
+	padding: 0 !important;
+}
+
+.buttonShow>.ui-button-text {
+	padding: 0 !important;
+}
+
+.calendarButton>input{
+	width: 7em !important;
+}
+
+.calendarButton>button {
+	width: 2em !important;
+/* 	float: right !important; */
+}
+.selStyleInput{
+	margin-left: 135px !important;
+	width: 10em !important;
+}
+.selStyleButton{
+	text-align: center;
+	width: 2em !important;
+	height: 2em !important;
+	font-size: 16px !important;
+	margin-left: 20px !important;
+}
+.selStyleButtonAdd{
+		     margin-left: 149px !important;
+    margin-right: -15px !important;
+}
+.selStyleButtonDel{
+		    margin-left: -135px !important;
+}
+.selStyleButton> .ui-button-text {
+	padding: 0 !important;
+}
+.selInputTrabaJornaInput{
+	margin-left: -10px !important;
+}
+.selInputTrabaJornaAdd{
+	margin-left: 100px !important;
+}
+.selInputTrabaJornaDel{
+	margin-left: 40px !important;
+}
+.selInputEmpreInput{
+	margin-left: -10px !important;
+}
+.selInputEmpreAdd{
+	margin-left: 80px !important;
+}
+.selInputEmpreDel{
+	margin-left: 2px !important;
+}
+#tabHelp  ul{
+	height: 100% !important;	
+}

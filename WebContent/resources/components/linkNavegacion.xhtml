@@ -1,0 +1,19 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:composite="http://java.sun.com/jsf/composite">
+
+	<composite:interface>
+		<composite:attribute name="outCome" default="" required="false"
+		type="java.lang.String" />
+		<composite:attribute name="value" default="" required="false" />
+		<composite:attribute name="styleClass" default="" required="false" />
+	</composite:interface>
+
+	<composite:implementation>
+			<p:link outcome="#{cc.attrs.outCome}" value="#{cc.attrs.value}" styleClass="#{cc.attrs.styleClass}"/>
+	</composite:implementation>
+
+</ui:composition>

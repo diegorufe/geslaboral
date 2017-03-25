@@ -1,0 +1,98 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:sec="http://www.springframework.org/security/tags"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ges="http://java.sun.com/jsf/composite/components"
+	xmlns:p="http://primefaces.org/ui">
+	<h:outputStylesheet library="css" name="dialogs.css" />
+	<p:dialog modal="true" widgetVar="abmDialogUsuarios"
+		closeOnEscape="true" position="center" resizable="false"
+		responsive="true" id="abmUsuarios" header="#{msg['usuario.usuario']}">
+		<p:ajax event="close" update=":formUsuarios:usuarios:usuariosTable" />
+		<div class="dialog">
+			<div class="ui-grid ui-grid-responsive ui-fluid">
+				<div class="ui-grid-col-12">
+					<h:form id="account">
+						<p:growl id="accountGrowl" showDetail="false" sticky="true" />
+						<p:panelGrid styleClass="grid-user no-boder" columns="1"
+							layout="grid">
+							<ges:labelGenerico forComponent=":account:nickDiv:nickInput"
+								styleClass="font-montserrat" value="#{msg['usuario.nick']}" />
+							<ges:inputTextGenerico id="nickDiv"
+								value="#{usuariosController.model.nick}" idInput="nickInput"
+								styleClass="font-montserrat"
+								disabled="#{usuariosController.show}" requiered="true" />
+							<h:outputText styleClass="font-montserrat" rendered="#{!usuariosController.add}"
+								value="#{msg['usuario.cambiarContra']}" />
+							<p:selectBooleanCheckbox 
+								rendered="#{!usuariosController.add}"
+								styleClass="font-montserrat"
+								value="#{usuariosController.model.cambiarPassword}"
+								disabled="#{usuariosController.show}">
+								<p:ajax update=":account:passwordDiv:passwordInput" 
+								listener="#{usuariosController.cambiarPasswordListener}" />
+							</p:selectBooleanCheckbox>	
+							<ges:labelGenerico styleClass="font-montserrat"
+								forComponent=":account:passwordDiv:passwordInput"
+								value="#{msg['usuario.password']}" />
+							<ges:inputTextGenerico id="passwordDiv"
+								styleClass="font-montserrat"
+								value="#{usuariosController.model.passwordRepeat}"
+								disabled="#{usuariosController.show or !usuariosController.model.cambiarPassword}" idInput="passwordInput"
+								type="password" requiered="true" />
+							<table>
+								<tr>
+									<c:choose>
+										<c:when test="#{usuariosController.show}">
+											<td><ges:buttonEdit updateButton="account"
+													rendered="#{usuariosController.show}"
+													actionButton='#{usuariosController.cambioEstado("M")}' /></td>
+											<td><ges:buttonRemove
+													rendered="#{usuariosController.show}"
+													onClick="PF('delUsuarioDialog').show()" /></td>
+										</c:when>
+										<c:when test="#{usuariosController.add}">
+											<td><ges:buttonAccept updateButton="account"
+													rendered="#{usuariosController.add}"
+													actionButton='#{usuariosController.addModel(null)}' /></td>
+											<td><ges:buttonCancel
+													updateButton="account, account:accountGrowl"
+													rendered="#{usuariosController.add}"
+													actionButton='#{usuariosController.cambioEstado("S")}' /></td>
+										</c:when>
+										<c:when test="#{usuariosController.modi}">
+											<td><ges:buttonAccept
+													updateButton="account, account:accountGrowl"
+													rendered="#{usuariosController.modi}"
+													actionButton='#{usuariosController.modModel()}' /></td>
+											<td><ges:buttonCancel
+													updateButton="account, account:accountGrowl"
+													rendered="#{usuariosController.isModi()}"
+													actionButton='#{usuariosController.cancelAbmAction}' /></td>
+										</c:when>
+									</c:choose>
+								</tr>
+							</table>
+						</p:panelGrid>
+					</h:form>
+				</div>
+			</div>
+		</div>
+	</p:dialog>
+	<p:confirmDialog id="delUsuarioDialog" closable="true"
+		closeOnEscape="true" height="30" message="#{msg['seguro.borrar']}"
+		header="#{msg['borrar.registro']}" severity="alert"
+		widgetVar="delUsuarioDialog">
+		<table style="margin: 0 auto !important;">
+			<tr>
+				<td><ges:buttonAccept
+						actionButton="#{usuariosController.delModelModal}"
+						updateButton=":delUsuarioDialog,:formUsuarios:usuarios:usuariosTable" /></td>
+				<td><ges:buttonCancel updateButton=":delUsuarioDialog"
+						onClick="PF('delUsuarioDialog').hide()" /></td>
+			</tr>
+		</table>
+	</p:confirmDialog>
+</ui:composition>

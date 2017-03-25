@@ -1,0 +1,28 @@
+body{
+	background: white !important;
+}
+.dialog {
+	overflow: hidden !important;
+	text-align: center;
+	font-family: monserrat !important;
+	border: none !important;
+}
+.dialog table{
+	text-align: center;
+	margin: 0 auto;
+}
+.dialog .ui-widget-content{
+	border: none !important;
+}
+.grid-user .ui-grid-row {
+	border: none !important;
+}
+.no-boder{
+	border: none !important;
+}
+
+@media ( max-width :600px) {
+	.grid-user .ui-grid-row {
+		border: none !important;
+	}
+}

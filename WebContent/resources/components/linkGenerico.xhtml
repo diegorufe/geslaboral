@@ -1,0 +1,22 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:composite="http://java.sun.com/jsf/composite">
+
+	<composite:interface>
+		<composite:attribute name="ajaxLink" default="false" required="false" />
+		<composite:attribute name="valueLink" default="false" required="false" />
+		<composite:attribute name="styleClass" default="" required="false" />
+		<composite:attribute name="style" default="" required="false" />
+		<composite:attribute name="actionLink" default="#"
+			method-signature="java.lang.String action()" required="false" />
+	</composite:interface>
+
+	<composite:implementation>
+			<p:commandLink styleClass="linkGenerico #{cc.attrs.styleClass}" ajax="#{cc.attrs.ajaxLink}"
+				style="{cc.attrs.style}" action="#{cc.attrs.actionLink}" value="#{cc.attrs.valueLink}" />
+	</composite:implementation>
+
+</ui:composition>

@@ -1,0 +1,90 @@
+<pretty-config xmlns="http://ocpsoft.org/schema/rewrite-config-prettyfaces" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+  xsi:schemaLocation="http://ocpsoft.org/schema/rewrite-config-prettyfaces
+                      http://ocpsoft.org/xml/ns/prettyfaces/rewrite-config-prettyfaces.xsd">
+	
+	
+	<url-mapping id="redirect">
+		<pattern value="/" />
+		<view-id value="/views/pages/redirect.xhtml" />
+	</url-mapping>
+	
+	<url-mapping id="redirectLogout">
+		<pattern value="/logout.cifp" />
+		<view-id value="/views/pages/redirect.xhtml" />
+	</url-mapping>
+	
+	
+	<url-mapping id="login">
+		<pattern value="/Login.cifp" />
+		<view-id value="/views/pages/login.xhtml" />
+	</url-mapping>
+	
+	<url-mapping id="home">
+		<pattern value="/Home.cifp" />
+		<view-id value="/views/pages/home.xhtml" />
+	</url-mapping>
+	
+	
+	<url-mapping id="Account">
+		<pattern value="/Account.cifp" />
+		<view-id value="/views/pages/usuario/cuenta.xhtml" />
+	</url-mapping>
+	
+	<url-mapping id="Enterprises">
+		<pattern value="/Enterprise.cifp" />
+		<view-id value="/views/pages/empresa/empresas.xhtml" />
+	</url-mapping>
+	
+	<url-mapping id="Employees">
+		<pattern value="/Employers.cifp" />
+		<view-id value="/views/pages/trabajador/trabajadores.xhtml" />
+	</url-mapping>
+	
+	<url-mapping id="Users">
+		<pattern value="/Users.cifp" />
+		<view-id value="/views/pages/usuario/usuarios.xhtml" />
+	</url-mapping>
+	
+	<url-mapping id="Journey">
+		<pattern value="/Journeys.cifp" />
+		<view-id value="/views/pages/jornada/jornadas.xhtml" />
+	</url-mapping>
+	
+	<url-mapping id="EmployeStadistics">
+		<pattern value="/EmployeStadistics.cifp" />
+		<view-id value="/views/pages/estadistica/estadisiticasTrabajador.xhtml" />
+	</url-mapping>
+	
+	<url-mapping id="EnterpriseStadistics">
+		<pattern value="/EnterpriseStadistics.cifp" />
+		<view-id value="/views/pages/estadistica/estadisiticasEmpresa.xhtml" />
+	</url-mapping>
+	
+	<url-mapping id="UserStadistics">
+		<pattern value="/UserStadistics.cifp" />
+		<view-id value="/views/pages/estadistica/estadisiticasUsuario.xhtml" />
+	</url-mapping>
+	
+	<url-mapping id="Help">
+		<pattern value="/Help.cifp" />
+		<view-id value="/views/pages/ayuda/ayuda.xhtml" />
+	</url-mapping>
+	
+	<url-mapping id="Improvements">
+		<pattern value="/Improvements.cifp" />
+		<view-id value="/views/pages/mejoras/mejoras.xhtml" />
+	</url-mapping>
+	
+	<url-mapping id="About">
+		<pattern value="/About.cifp" />
+		<view-id value="/views/pages/acerca/acerca.xhtml" />
+	</url-mapping>
+	
+	<url-mapping id="accesoDenegado">
+		<pattern value="/403.cifp" />
+		<view-id value="/views/pages/accesoDenegado.xhtml" />
+	</url-mapping>
+	
+	
+</pretty-config>

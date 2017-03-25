@@ -1,0 +1,57 @@
+<ui:composition template="/views/pages/layout/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:sec="http://www.springframework.org/security/tags"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ges="http://java.sun.com/jsf/composite/components"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="title">
+		<h:outputText value="#{msg['usuario.header']}" />
+	</ui:define>
+	<ui:define name="content">
+		<div class="ui-grid ui-grid-responsive ui-fluid">
+			<div class="ui-grid-col-12">
+				<h:form id="formUsuarios">
+					<table class="amb">
+						<tr>
+							<p:growl id="accionesAbmUsuario" sticky="true" />
+							<td><ges:buttonShow
+									actionButton='#{usuariosController.actionGoShow}'
+									updateButton="formUsuarios:accionesAbmUsuario" /></td>
+							<td><ges:buttonAdd
+									actionButton='#{usuariosController.actionGoAdd}'
+									updateButton="formUsuarios:accionesAbmUsuario" /></td>
+							<td><ges:buttonEdit
+									actionButton='#{usuariosController.actionGoMod}'
+									updateButton="formUsuarios:accionesAbmUsuario" /></td>
+							<td><ges:buttonRemove
+									actionButton='#{usuariosController.actionGoDel}'
+									updateButton="formUsuarios:accionesAbmUsuario" /> <p:confirmDialog
+									id="delUsuario" closable="true" closeOnEscape="true"
+									height="30" message="#{msg['seguro.borrar']}"
+									header="#{msg['borrar.registro']}" severity="alert"
+									widgetVar="delUsuario">
+									<table style="margin: 0 auto !important;">
+										<tr>
+											<td><ges:buttonAccept
+													actionButton="#{usuariosController.delModel}"
+													updateButton="formUsuarios:accionesAbmUsuario,formUsuarios:delUsuario,:formUsuarios:usuarios:usuariosTable" /></td>
+											<td><ges:buttonCancel
+													updateButton="formUsuarios:delUsuario"
+													onClick="PF('delUsuario').hide()" /></td>
+										</tr>
+									</table>
+								</p:confirmDialog></td>
+						</tr>
+					</table>
+					<ges:dataTableGenerico id="usuarios" idTable="usuariosTable"
+						lazyTable="#{usuariosController.lazyTable}" selectionMode="single" />
+				</h:form>
+			</div>
+		</div>
+		<ui:include src="/views/pages/usuario/abmUsuario.xhtml"></ui:include>
+	</ui:define>
+</ui:composition>

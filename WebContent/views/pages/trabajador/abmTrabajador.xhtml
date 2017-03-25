@@ -1,0 +1,211 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:sec="http://www.springframework.org/security/tags"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ges="http://java.sun.com/jsf/composite/components"
+	xmlns:p="http://primefaces.org/ui">
+	<h:outputStylesheet library="css" name="dialogs.css" />
+
+	<p:dialog modal="true" widgetVar="abmDialogTrabajador"
+		draggable="false" closeOnEscape="true" position="center"
+		resizable="false" responsive="true" id="abmTrabajadores"
+		header="#{msg['trabajador.titulo']}">
+		<p:ajax event="close"
+			update=":formTrabajadores:trabajadores:trabajadoresTable" />
+		<h:form id="trabajadorAbm">
+			<p:scrollPanel id="scrollPanelTraba" mode="native"
+				style=" max-height:450px; border:none;">
+				<div class="dialog">
+					<div class="ui-grid ui-grid-responsive ui-fluid">
+						<div class="ui-grid-col-12">
+
+							<p:growl id="trabajadorAbmGrowl" showDetail="false" sticky="true" />
+							<p:panelGrid styleClass="grid-user no-boder" columns="1"
+								layout="grid">
+								<table>
+									<tr>
+										<c:choose>
+											<c:when test="#{trabajadorController.show}">
+												<td><ges:buttonEdit updateButton="trabajadorAbm"
+														rendered="#{trabajadorController.show}"
+														actionButton='#{trabajadorController.cambioEstado("M")}' /></td>
+												<td><ges:buttonRemove
+														rendered="#{trabajadorController.show}"
+														onClick="PF('delTrabajadorDialog').show()" /></td>
+											</c:when>
+											<c:when test="#{trabajadorController.add}">
+												<td><ges:buttonAccept
+														updateButton="trabajadorAbm"
+														rendered="#{trabajadorController.add}"
+														actionButton='#{trabajadorController.addModel(trabajadorController.model.codigo)}' /></td>
+												<td><ges:buttonCancel idButtom="idButtonAddTraba"
+														updateButton="trabajadorAbm, trabajadorAbm:trabajadorAbmGrowl"
+														rendered="#{trabajadorController.add}"
+														onClick="PF('abmDialogTrabajador').hide()" /></td>
+											</c:when>
+											<c:when test="#{trabajadorController.modi}">
+												<td><ges:buttonAccept
+														updateButton="trabajadorAbm, trabajadorAbm:trabajadorAbmGrowl"
+														rendered="#{trabajadorController.modi}"
+														actionButton='#{trabajadorController.modModel()}' /></td>
+												<td><ges:buttonCancel
+														updateButton="trabajadorAbm, trabajadorAbm:trabajadorAbmGrowl"
+														rendered="#{trabajadorController.modi}"
+														actionButton='#{trabajadorController.cambioEstado("S")}' /></td>
+											</c:when>
+										</c:choose>
+									</tr>
+								</table>
+							</p:panelGrid>
+							<p:accordionPanel id="accordionTraba" multiple="true">
+								<p:tab title="#{msg['trabajador.tab1']}">
+									<p:panelGrid styleClass="grid-user no-boder" columns="1"
+										layout="grid">
+										<ges:labelGenerico
+											forComponent=":trabajadorAbm:accordionTraba:codigoDiv:codigoInput"
+											styleClass="font-montserrat"
+											value="#{msg['trabajador.codigo']}" />
+										<ges:inputTextGenerico id="codigoDiv"
+											value="#{trabajadorController.model.codigo}"
+											idInput="codigoInput" max="10"
+											disabled="#{trabajadorController.isShow() or trabajadorController.isModi()}" />
+										<ges:labelGenerico
+											forComponent=":trabajadorAbm:accordionTraba:nombreDiv:nombreInput"
+											styleClass="font-montserrat"
+											value="#{msg['trabajador.nombre']}" />
+										<ges:inputTextGenerico id="nombreDiv"
+											value="#{trabajadorController.model.nombre}"
+											idInput="nombreInput" max="50"
+											disabled="#{trabajadorController.show}" />
+										<ges:labelGenerico
+											forComponent=":trabajadorAbm:accordionTraba:ape1Div:ape1Input"
+											styleClass="font-montserrat"
+											value="#{msg['trabajador.apellido1']}" />
+										<ges:inputTextGenerico id="ape1Div"
+											value="#{trabajadorController.model.apellido1}"
+											idInput="ape1Input" max="50"
+											disabled="#{trabajadorController.show}" />
+										<ges:labelGenerico
+											forComponent=":trabajadorAbm:accordionTraba:ape2Div:ape2Input"
+											styleClass="font-montserrat"
+											value="#{msg['trabajador.apellido2']}" />
+										<ges:inputTextGenerico id="ape2Div"
+											value="#{trabajadorController.model.apellido2}"
+											idInput="ape2Input" max="50"
+											disabled="#{trabajadorController.show}" />
+										<ges:labelGenerico
+											forComponent=":trabajadorAbm:accordionTraba:empresaDiv:divTextSel"
+											styleClass="font-montserrat"
+											value="#{msg['trabajador.empresa']}" />
+										<ges:textButtonSel id="empresaDiv" idText="selEmpreText"
+											dynamic="true" idDivText="divTextSel"
+											value="#{trabajadorController.model.codigoEmpresa}"
+											type="empresa" update=":empresaDiv2:EmpresaSel2"
+											controller="#{selEmpresaController}"
+											disabledButtons="#{trabajadorController.show}" />
+									</p:panelGrid>
+								</p:tab>
+								<p:tab title="#{msg['trabajador.tab2']}">
+									<p:panelGrid styleClass="grid-user no-boder" columns="1"
+										layout="grid">
+										<ges:labelGenerico
+											forComponent=":trabajadorAbm:accordionTraba:divNac:fechaNacInput"
+											styleClass="font-montserrat"
+											value="#{msg['trabajador.fechaNacimiento']}" />
+										<ges:calendarButton id="divNac" idCalendar="fechaNacInput"
+											disabled="#{trabajadorController.show}"
+											value="#{trabajadorController.model.fechaNacimiento}"
+											growl=":trabajadorAbm:trabajadorAbmGrowl" />
+									</p:panelGrid>
+									<p:panelGrid styleClass="grid-user no-boder" columns="1"
+										layout="grid">
+										<ges:labelGenerico
+											forComponent=":trabajadorAbm:accordionTraba:divAlta:fechaAltaInput"
+											styleClass="font-montserrat"
+											value="#{msg['trabajador.fechaAlta']}" />
+										<ges:calendarButton id="divAlta" idCalendar="fechaAltaInput"
+											disabled="#{trabajadorController.show}"
+											value="#{trabajadorController.model.fechaAlta}"
+											growl=":trabajadorAbm:trabajadorAbmGrowl" />
+									</p:panelGrid>
+									<p:panelGrid styleClass="grid-user no-boder" columns="1"
+										layout="grid">
+										<ges:labelGenerico
+											forComponent=":trabajadorAbm:accordionTraba:divBaja:fechaBajaInput"
+											styleClass="font-montserrat"
+											value="#{msg['trabajador.fechaBaja']}" />
+										<ges:calendarButton id="divBaja" idCalendar="fechaBajaInput"
+											value="#{trabajadorController.model.fechaBaja}"
+											disabled="#{trabajadorController.show}"
+											growl=":trabajadorAbm:trabajadorAbmGrowl" />
+									</p:panelGrid>
+								</p:tab>
+								<p:tab title="#{msg['trabajador.tab3']}">
+									<p:panelGrid styleClass="grid-user no-boder" columns="1"
+										layout="grid">
+										<ges:labelGenerico
+											forComponent=":trabajadorAbm:accordionTraba:dir1Div:dir1Input"
+											styleClass="font-montserrat"
+											value="#{msg['trabajador.dir1']}" />
+										<ges:inputTextGenerico id="dir1Div"
+											value="#{trabajadorController.model.dir1}"
+											idInput="dir1Input" max="30"
+											disabled="#{trabajadorController.show}" />
+										<ges:labelGenerico
+											forComponent=":trabajadorAbm:accordionTraba:provinciaDiv:provinciaInput"
+											styleClass="font-montserrat"
+											value="#{msg['trabajador.provincia']}" />
+										<ges:inputTextGenerico id="provinciaDiv"
+											value="#{trabajadorController.model.provincia}"
+											idInput="provinciaInput" max="30"
+											disabled="#{trabajadorController.show}" />
+										<ges:labelGenerico
+											forComponent=":trabajadorAbm:accordionTraba:poblacionDiv:poblacionInput"
+											styleClass="font-montserrat"
+											value="#{msg['trabajador.poblacion']}" />
+										<ges:inputTextGenerico id="poblacionDiv"
+											value="#{trabajadorController.model.poblacion}"
+											idInput="poblacionInput" max="30"
+											disabled="#{trabajadorController.show}" />
+										<ges:labelGenerico
+											forComponent=":trabajadorAbm:accordionTraba:paisDiv:paisInput"
+											styleClass="font-montserrat"
+											value="#{msg['trabajador.pais']}" />
+										<ges:inputTextGenerico id="paisDiv"
+											value="#{trabajadorController.model.pais}"
+											idInput="paisInput" max="30"
+											disabled="#{trabajadorController.show}" />
+									</p:panelGrid>
+								</p:tab>
+							</p:accordionPanel>
+
+						</div>
+					</div>
+				</div>
+			</p:scrollPanel>
+		</h:form>
+	</p:dialog>
+	<p:confirmDialog id="delTrabajadorDialog" closable="true"
+		appendTo="@(body)" closeOnEscape="true" height="30"
+		message="#{msg['seguro.borrar']}" header="#{msg['borrar.registro']}"
+		severity="alert" widgetVar="delTrabajadorDialog">
+
+		<table style="margin: 0 auto !important;">
+			<tr>
+				<td><p:commandButton ajax="true" icon="fa fa-fw fa-thumbs-up"
+						styleClass="buttonAcept"
+						action="#{trabajadorController.delModelModal}"
+						update=":delTrabajadorDialog,:formTrabajadores:trabajadores:trabajadoresTable" /></td>
+
+				<td><p:commandButton ajax="true" icon="fa fa-fw fa-thumbs-down"
+						styleClass="buttonCancel"
+						onclick="PF('delTrabajadorDialog').hide()"
+						update="delTrabajadorDialog" /></td>
+
+			</tr>
+		</table>
+
+	</p:confirmDialog>
+</ui:composition>

@@ -1,0 +1,25 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ges="http://java.sun.com/jsf/composite/components"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+	<composite:interface>
+		<composite:attribute name="icon" default="" 
+			required="false" />	
+		<composite:attribute name="actionButton" default="#"
+			method-signature="java.lang.String action()" required="false" />
+		<composite:attribute name="updateButton" default="" />
+		<composite:attribute name="styleClassButton"
+			default="" required="false" />	
+	</composite:interface>
+	<composite:implementation>
+		<ges:buttonGenerico ajaxButtonGenerico="true"
+			icon="fa fa-fw fa-eye"
+			actionButtonGenerico="#{cc.attrs.actionButton}"
+			update="#{cc.attrs.updateButton}"
+			styleClassButtonGenerico="buttonShow #{cc.attrs.styleClassButton}" />
+	</composite:implementation>
+</ui:composition>

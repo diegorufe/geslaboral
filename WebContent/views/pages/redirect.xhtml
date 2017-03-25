@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:erp="http://java.sun.com/jsf/composite/components">
+<f:view locale="#{idiomaController.locale}">
+	<h:head>
+		<h:outputStylesheet library="css" name="style.css" />
+		<meta
+			content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+			name="viewport" />
+		<meta http-equiv="cache-control" content="max-age=0" />
+		<meta http-equiv="cache-control" content="no-cache" />
+		<meta http-equiv="expires" content="-1" />
+		<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
+		<meta http-equiv="pragma" content="no-cache" />
+		<script>
+	</script>
+	</h:head>
+	<h:body>
+		<style>
+form {
+	display: none;
+}
+</style>
+		<h:form id="redirectLoginForm">
+			<p:commandButton id="login" ajax="false"
+				action="#{navigationController.goLoginUri()}" />
+		</h:form>
+		<h:form id="redirectHomeForm">
+			<p:commandButton id="home" ajax="false"
+				action="#{navigationController.goLoginUri()}" />
+		</h:form>
+		<c:choose>
+			<c:when
+				test="#{usuarioController != null and usuarioController.usuarioSesion == null}">
+				<script type="">
+						document.getElementById('redirectLoginForm:login').click(); 
+					</script>
+			</c:when>
+			<c:when test="#{usuarioController.usuarioSesion == null}">
+				<script type="">
+						document.getElementById('redirectLoginForm:login').click(); 
+					</script>
+			</c:when>
+			<c:when test='#{usuarioController.usuarioSesion.nick == ""}'>
+				<script type="">
+						document.getElementById('redirectLoginForm:login').click(); 
+					</script>
+			</c:when>
+			<c:when test='#{usuarioController == null}'>
+				<script type="">
+						document.getElementById('redirectLoginForm:login').click(); 
+					</script>
+			</c:when>
+			<c:otherwise>
+				<script type="">
+						document.getElementById('redirectHomeForm:home').click(); 
+					</script>
+			</c:otherwise>
+		</c:choose>
+	</h:body>
+</f:view>
+</html>

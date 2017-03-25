@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
+  <welcome-file-list>
+    <welcome-file>views/pages/redirect.xhtml</welcome-file>
+  </welcome-file-list>
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>
+                /WEB-INF/spring-security.xml
+                /WEB-INF/applicationContext.xml
+        </param-value>
+  </context-param>
+  <context-param>
+    <param-name>javax.servlet.jsp.jstl.fmt.localizationContext</param-name>
+    <param-value>com.gesLaboral.messages.messages</param-value>
+  </context-param>
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+  <listener>
+    <listener-class>
+		org.springframework.web.context.request.RequestContextListener
+	</listener-class>
+  </listener>
+  <context-param>
+    <param-name>primefaces.THEME</param-name>
+    <param-value>start</param-value>
+  </context-param>
+  <context-param>
+    <param-name>primefaces.FONT_AWESOME</param-name>
+    <param-value>true</param-value>
+  </context-param>
+  <filter>
+    <filter-name>springSecurityFilterChain</filter-name>
+    <filter-class>
+	    org.springframework.web.filter.DelegatingFilterProxy
+	  </filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>springSecurityFilterChain</filter-name>
+    <url-pattern>/*</url-pattern>
+    <dispatcher>FORWARD</dispatcher>
+    <dispatcher>INCLUDE</dispatcher>
+    <dispatcher>ERROR</dispatcher>
+    <dispatcher>REQUEST</dispatcher>
+  </filter-mapping>
+<!--   <filter> -->
+<!--     <filter-name>UrlsFilter</filter-name> -->
+<!--     <filter-class>com.gesLaboral.filters.UrlsFilter</filter-class> -->
+<!--   </filter> -->
+<!--   <filter-mapping> -->
+<!--     <filter-name>UrlsFilter</filter-name> -->
+<!--     <url-pattern>/views/pages/*</url-pattern> -->
+<!--   </filter-mapping> -->
+<!--  <filter>  -->
+<!--     <filter-name>PrettyFilter</filter-name> -->
+<!--     <filter-class>com.gesLaboral.filters.PrettyFilter</filter-class> -->
+<!--   </filter> -->
+<!--   <filter-mapping> -->
+<!--     <filter-name>PrettyFilter</filter-name> -->
+<!--     <url-pattern>*.cifp</url-pattern> -->
+<!--   </filter-mapping> -->
+  <context-param>
+    <description>State saving method: 'client' or 'server' (=default). See JSF Specification 2.5.2</description>
+    <param-name>javax.faces.STATE_SAVING_METHOD</param-name>
+    <param-value>client</param-value>
+  </context-param>
+  <context-param>
+    <param-name>javax.servlet.jsp.jstl.fmt.localizationContext</param-name>
+    <param-value>resources.application</param-value>
+  </context-param>
+  <listener>
+    <listener-class>com.sun.faces.config.ConfigureListener</listener-class>
+  </listener>
+<context-param>
+    <param-name>javax.faces.CONFIG_FILES</param-name>
+    <param-value>
+        WEB-INF/path/to/faces-config.xml,WEB-INF/managedBean-config.xml,WEB-INF/navigation-config.xml
+   </param-value>
+</context-param>
+
+<servlet>
+    <servlet-name>Faces Servlet</servlet-name>
+    <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+    <load-on-startup>1</load-on-startup>
+</servlet>
+<servlet-mapping>
+    <servlet-name>Faces Servlet</servlet-name>
+    <url-pattern>*.xhtml</url-pattern>
+</servlet-mapping>
+<servlet-mapping>
+    <servlet-name>Faces Servlet</servlet-name>
+    <url-pattern>*.cifp</url-pattern>
+</servlet-mapping>
+</web-app>

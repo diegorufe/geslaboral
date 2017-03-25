@@ -1,0 +1,95 @@
+<ui:composition template="/views/pages/layout/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:sec="http://www.springframework.org/security/tags"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ges="http://java.sun.com/jsf/composite/components"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="title">
+		<h:outputText value="#{msg['ayuda.header']}" />
+	</ui:define>
+	<ui:define name="content">
+		<div class="ui-grid ui-grid-responsive ui-fluid">
+			<div class="ui-grid-col-12">
+				<p:panel header="#{msg['ayuda.header']}">
+				
+				<p:tabView id="tabHelp" orientation="left" dynamic="true">
+					<p:tab title="#{msg['ayuda.titleCuenta']}">
+						<p>
+							<h:outputText value="#{msg['ayuda.cuenta']}" />
+						</p>
+					</p:tab>
+					<p:tab title="#{msg['ayuda.titleEmpresa']}">
+						<p>
+							<h:outputText value="#{msg['ayuda.empresa']}" />
+						</p>
+					</p:tab>
+					<p:tab title="#{msg['ayuda.titleTrabajador']}">
+						<p>
+							<h:outputText value="#{msg['ayuda.trabajador']}" />
+						</p>
+					</p:tab>
+					<p:tab title="#{msg['ayuda.titleSelecionar']}">
+						<p>
+							<h:outputText value="#{msg['ayuda.selecionar']}" />
+						</p>
+					</p:tab>
+					<p:tab title="#{msg['ayuda.titleCerrarSesion']}">
+						<p>
+							<h:outputText value="#{msg['ayuda.cerrarSesion']}" />
+						</p>
+					</p:tab>
+					<p:tab title="#{msg['ayuda.titleOrdenar']}">
+						<p>
+							<h:outputText value="#{msg['ayuda.ordernarTablas']}" />
+						</p>
+					</p:tab>
+					<p:tab title="#{msg['ayuda.titleMultiOrdenacion']}">
+						<p>
+							<h:outputText value="#{msg['ayuda.multiOrdenacion']}" />
+						</p>
+					</p:tab>
+					<p:tab title="#{msg['ayuda.titleSelecinarTabla']}">
+						<p>
+							<h:outputText value="#{msg['ayuda.selecionarTabla']}" />
+						</p>
+					</p:tab>
+					<p:tab title="#{msg['ayuda.titleJornadasAdd']}">
+						<p>
+							<h:outputText value="#{msg['ayuda.jornadasAdd']}" />
+						</p>
+					</p:tab>
+					<p:tab title="#{msg['ayuda.titleJornadasMod']}">
+						<p>
+							<h:outputText value="#{msg['ayuda.jorndasMod']}" />
+						</p>
+					</p:tab>
+					<p:tab title="#{msg['ayuda.titleJornadasFiltro']}">
+						<p>
+							<h:outputText value="#{msg['ayuda.jornadasFiltro']}" />
+						</p>
+					</p:tab>
+					<p:tab title="#{msg['ayuda.titleEstadisticasTrabajador']}">
+						<p>
+							<h:outputText value="#{msg['ayuda.estadisiticasTrabajador']}" />
+						</p>
+					</p:tab>
+					<p:tab title="#{msg['ayuda.titleEstadisticasEmpresa']}">
+						<p>
+							<h:outputText value="#{msg['ayuda.estadisticasEmpresa']}" />
+						</p>
+					</p:tab>
+					<p:tab title="#{msg['ayuda.titleEstadisiticasUsuarios']}">
+						<p>
+							<h:outputText value="#{msg['ayuda.estadisticasUsuario']}" />
+						</p>
+					</p:tab>
+				</p:tabView>
+				</p:panel>
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>

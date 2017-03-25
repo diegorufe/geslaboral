@@ -1,0 +1,79 @@
+<ui:composition template="/views/pages/templateDialog.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:sec="http://www.springframework.org/security/tags"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ges="http://java.sun.com/jsf/composite/components"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="title">
+		<h:outputText value="#{msg['menu.Cuenta']}" />
+	</ui:define>
+	<ui:define name="content">
+		<div class="dialog">
+			<div class="ui-grid ui-grid-responsive ui-fluid">
+				<div class="ui-grid-col-12">
+					<h:form id="account">
+						<p:growl id="accountGrowl" showDetail="false" sticky="true"/>
+						<p:panelGrid styleClass="grid-user no-boder" columns="1"
+							layout="grid">
+							<ges:labelGenerico forComponent=":account:nickDiv:nickInput"
+								styleClass="font-montserrat"
+								value="#{msg['usuario.nick']}" />
+							<ges:inputTextGenerico id="nickDiv"
+								value="#{cuentaController.cuenta.nick}" idInput="nickInput"
+								styleClass="font-montserrat"
+								disabled="#{cuentaController.show}" requiered="true" />
+							<h:outputText styleClass="font-montserrat" value="Cambiar contraseña" />
+							<p:selectBooleanCheckbox 
+								styleClass="font-montserrat"
+								value="#{cuentaController.cuenta.cambiarPassword}"
+								disabled="#{cuentaController.show}">
+								<p:ajax update=":account:passwordDiv:passwordInput, :account:passwordRDiv:passwordRInput" 
+								listener="#{cuentaController.cambiarPasswordListener}" />
+							</p:selectBooleanCheckbox>
+							<ges:labelGenerico
+								styleClass="font-montserrat"
+								forComponent=":account:passwordDiv:passwordInput"
+								value="#{msg['usuario.password']}" />
+							<ges:inputTextGenerico id="passwordDiv"
+								styleClass="font-montserrat"
+								value="#{cuentaController.cuenta.password}"
+								disabled="#{cuentaController.show || !cuentaController.cuenta.cambiarPassword}" idInput="passwordInput"
+								type="password" requiered="true" />
+							<ges:labelGenerico
+								styleClass="font-montserrat"
+								forComponent=":account:passwordRDiv:passwordRInput"
+								value="#{msg['cuenta.repitePass']}" />
+							<ges:inputTextGenerico id="passwordRDiv"
+								styleClass="font-montserrat"
+								value="#{cuentaController.cuenta.passwordRepeat}"
+								disabled="#{cuentaController.show || !cuentaController.cuenta.cambiarPassword}" idInput="passwordRInput"
+								type="password" requiered="true" />
+							<table>
+								<tr>
+									<c:if test="#{cuentaController.show}">
+										<td><ges:buttonEdit updateButton="account"
+												rendered="#{cuentaController.show}"
+												actionButton='#{cuentaController.cambioEstado("M")}' /></td>
+										<td><ges:buttonRemove rendered="#{cuentaController.show}"
+												actionButton="#{cuentaController.borrarCuenta}" /></td>
+									</c:if>
+									<c:if test="#{!cuentaController.show}">
+										<td><ges:buttonAccept updateButton="account, account:accountGrowl"
+												rendered="#{!cuentaController.show}"
+												actionButton='#{cuentaController.modificarCuenta()}' /></td>
+										<td><ges:buttonCancel updateButton="account , account:accountGrowl"
+												rendered="#{!cuentaController.show}"
+												actionButton='#{cuentaController.cambioEstado("S")}' /></td>
+									</c:if>
+								</tr>
+							</table>
+						</p:panelGrid>
+					</h:form>
+				</div>
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>

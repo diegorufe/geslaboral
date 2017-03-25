@@ -1,0 +1,57 @@
+#contet-layout {
+/* 	Por alguna razón el float no funciona */
+	padding-top: 55px;
+	color: #72828B;
+	margin-left: 3.7em;
+	top: 4em;
+}
+#jornadasSchedule{
+	
+}
+
+#footer {
+	height: 10% !important;
+	bottom: 0px;
+	float: left;
+	width: 100% !important;
+	position: relative;
+}
+
+#footer .content-footer {
+	margin-left: 2.5em;
+	border: 2px solid red;
+	height: 100% !important;
+}
+/* User */
+.user_panel {
+	margin: 0 auto;
+	width: 16em;
+	overflow: auto;
+	text-align: center;
+	font-family: monserrat !important;
+	margin-top: 2em;
+}
+
+.grid-user>div {
+	border: none;
+}
+
+.grid-user, div, label, input, buttom, span, a {
+	font-family: monserrat;
+	font-size: 20px;
+}
+/* Media queries */
+@media ( max-width :400px) {
+	#contet-layout {
+		margin-left: 1em;
+	}
+	#footer {
+		display: none;
+	}
+}
+/* Empresa */
+#formEmpresas .amb  .ui-icon ,#formTrabajadores .amb  .ui-icon {
+	margin-top: -10px !important;
+	margin-left: -2px !important;
+	height: auto;
+}

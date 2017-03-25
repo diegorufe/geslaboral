@@ -1,0 +1,66 @@
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+	http://www.springframework.org/schema/util
+     http://www.springframework.org/schema/util/spring-util.xsd
+    http://www.springframework.org/schema/security 
+    http://www.springframework.org/schema/security/spring-security-4.0.xsd">
+	<http pattern="/resources/**" security="none" />
+	<!-- enable use-expressions -->
+	<http auto-config="false" use-expressions="true"
+		disable-url-rewriting="false">
+		<headers defaults-disabled="true">
+			<frame-options policy="SAMEORIGIN" />
+		</headers>
+		<intercept-url pattern="/Home.cifp" access="hasAnyAuthority('A','B')" />
+		<intercept-url pattern="/Login.cifp" access="permitAll" />
+		<intercept-url pattern="/Account.cifp" access="hasAnyAuthority('A','B')" />
+		<intercept-url pattern="/Enterprise.cifp" access="hasAnyAuthority('A','B')" />
+		<intercept-url pattern="/Employers.cifp" access="hasAnyAuthority('A','B')" />
+		<intercept-url pattern="/Users.cifp" access="hasAnyAuthority('A')" />
+		<intercept-url pattern="/Journeys.cifp" access="hasAnyAuthority('A','B')" />
+		<intercept-url pattern="/EmployeStadistics.cifp" access="hasAnyAuthority('A','B')" />
+		<intercept-url pattern="/EnterpriseStadistics.cifp"
+			access="hasAnyAuthority('A','B')" />
+		<intercept-url pattern="/UserStadistics.cifp" access="hasAnyAuthority('A','B')" />
+		<intercept-url pattern="/Help.cifp" access="hasAnyAuthority('A','B')" />
+		<intercept-url pattern="/Improvements.cifp" access="hasAnyAuthority('A','B')" />
+		<intercept-url pattern="/About.cifp" access="hasAnyAuthority('A','B')" />
+		<intercept-url pattern="/403.cifp" access="permitAll" />
+		<!-- access denied page -->
+		<access-denied-handler error-page="/403.cifp" />
+		<csrf disabled="true" />
+		<form-login always-use-default-target="false" login-page="/Login.cifp"
+			default-target-url="/Home.cifp" authentication-failure-url="/Login.cifp"
+			username-parameter="tabs:nickDiv:j_username" password-parameter="tabs:passwordDiv:j_password"
+			login-processing-url="/j_spring_security_check" />
+
+		<logout logout-url="/j_spring_security_logout"
+			success-handler-ref="logoutSuccessHandler" invalidate-session="false"
+			delete-cookies="JSESSIONID" />
+
+		<session-management invalid-session-url="/logout.cifp?invalidSession=true" />
+		<headers disabled="true" />
+
+		<!-- <session-management invalid-session-url="/Login.cifp"> -->
+		<!-- <concurrency-control max-sessions="1" -->
+
+		<!-- error-if-maximum-exceeded="true" /> -->
+		<!-- </session-management> -->
+
+	</http>
+	<!-- <authentication-manager alias="authenticationManager"> -->
+	<!-- <authentication-provider user-service-ref="UserAutenticaionService"> -->
+	<!-- <password-encoder hash="md5" /> -->
+	<!-- </authentication-provider> -->
+	<!-- </authentication-manager> -->
+
+	<authentication-manager>
+		<authentication-provider ref="customAuthenticationProvider">
+		</authentication-provider>
+	</authentication-manager>
+
+
+</beans:beans>

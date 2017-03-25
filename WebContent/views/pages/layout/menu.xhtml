@@ -1,0 +1,133 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:sec="http://www.springframework.org/security/tags"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ges="http://java.sun.com/jsf/composite/components"
+	xmlns:p="http://primefaces.org/ui">
+	<aside id="content-menu-header">
+		<h:form id="menuNavFormHeader">
+			<ul>
+				<li><ges:linkMenu ajaxLink="true" idLink="linkHomeMenuHeader"
+						titleLink="#{msg['menu.irHome']}"
+						actionLink="#{navigationController.goHomeUri()}"
+						styleClass="fa fa-home icon-menu" /></li>
+				<li><ges:linkMenu ajaxLink="true"
+						idLink="linkEmpresaMenuHeader"
+						titleLink="#{msg['menu.irEmpresa']}"
+						actionLink="#{navigationController.goEmpresaUri()}"
+						styleClass="fa fa-briefcase icon-menu" /></li>
+				<li><ges:linkMenu ajaxLink="true" idLink="linkTrabaMEnuHeader"
+						titleLink="#{msg['menu.irTrabajadores']}"
+						actionLink="#{navigationController.goTrabajadorUri()}"
+						styleClass="fa fa-users icon-menu" /></li>
+				<li><ges:linkMenu ajaxLink="true" idLink="linkCuentaMenuHeader"
+						titleLink="#{msg['menu.irCuenta']}"
+						actionLink="#{navigationController.goCuentaUri()}"
+						styleClass="fa fa-user icon-menu" /></li>
+				<li><ges:linkMenu ajaxLink="true"
+						idLink="linkJornadaMenuHeader"
+						titleLink="#{msg['menu.irJornadas']}"
+						actionLink="#{navigationController.goJornadasUri()}"
+						styleClass="fa fa-calendar icon-menu" /></li>
+				<li><ges:linkMenu ajaxLink="true"
+						idLink="linkEstadisticasTrabajadorMenuHeader"
+						titleLink="#{msg['menu.irEstadisticasTrabajador']}"
+						actionLink="#{navigationController.goEstadisticasTrabajadorUri()}"
+						styleClass="fa fa-line-chart icon-menu" /></li>
+				<li><ges:linkMenu ajaxLink="true"
+						idLink="linkEstadisticasEmpresaMenuHeader"
+						titleLink="#{msg['menu.irEstadisticasEmpresa']}"
+						actionLink="#{navigationController.goEstadisticasEmpresaUri()}"
+						styleClass="fa fa-bar-chart icon-menu" /></li>
+				<li><ges:linkMenu ajaxLink="true"
+						idLink="linkEstadisticasUsuarioMenuHeader"
+						titleLink="#{msg['menu.irEstadisticasUsuario']}"
+						actionLink="#{navigationController.goEstadisticasUsuarioUri()}"
+						styleClass="fa fa-area-chart icon-menu" /></li>
+				<c:if test="#{sessionController.isAdminRol()}">
+					<li><ges:linkMenu ajaxLink="true"
+							idLink="linkUsuariosMenuHeader"
+							titleLink="#{msg['menu.irUsuarios']}"
+							actionLink="#{navigationController.goUsuariosUri()}"
+							styleClass="fa fa-user-secret icon-menu" /></li>
+				</c:if>
+				<li><ges:linkMenu ajaxLink="true" idLink="linkAyudaMenuHeader"
+						titleLink="#{msg['menu.irAyuda']}"
+						actionLink="#{navigationController.goAyudaUri()}"
+						styleClass="fa fa-question icon-menu" /></li>
+				<li><ges:linkMenu ajaxLink="true"
+						idLink="linkMejorasMenuHeader"
+						titleLink="#{msg['menu.irMejoras']}"
+						actionLink="#{navigationController.goMejorasUri()}"
+						styleClass="fa fa-dollar icon-menu" /></li>
+				<li><ges:linkMenu ajaxLink="true" idLink="linkAcercaMenuHeader"
+						titleLink="#{msg['menu.irAcerca']}"
+						actionLink="#{navigationController.goAcercaUri()}"
+						styleClass="fa fa-exclamation icon-menu" /></li>
+			</ul>
+		</h:form>
+	</aside>
+	<aside id="content-menu">
+		<p:panel id="layout-menu">
+			<h:form id="menuNavForm">
+				<ul>
+					<li><ges:linkMenu ajaxLink="true" idLink="linkHomeMenu"
+							titleLink="#{msg['menu.irHome']}"
+							actionLink="#{navigationController.goHomeUri()}"
+							styleClass="fa fa-home icon-menu" /></li>
+					<li><ges:linkMenu ajaxLink="true" idLink="linkEmpresaMenu"
+							titleLink="#{msg['menu.irEmpresa']}"
+							actionLink="#{navigationController.goEmpresaUri()}"
+							styleClass="fa fa-briefcase icon-menu" /></li>
+					<li><ges:linkMenu ajaxLink="true" idLink="linkTrabaMEnu"
+							titleLink="#{msg['menu.irTrabajadores']}"
+							actionLink="#{navigationController.goTrabajadorUri()}"
+							styleClass="fa fa-users icon-menu" /></li>
+					<li><ges:linkMenu ajaxLink="true" idLink="linkCuentaMenu"
+							titleLink="#{msg['menu.irCuenta']}"
+							actionLink="#{navigationController.goCuentaUri()}"
+							styleClass="fa fa-user icon-menu" /></li>
+					<li><ges:linkMenu ajaxLink="true" idLink="linkJornadaMenu"
+							titleLink="#{msg['menu.irJornadas']}"
+							actionLink="#{navigationController.goJornadasUri()}"
+							styleClass="fa fa-calendar icon-menu" /></li>
+					<li><ges:linkMenu ajaxLink="true"
+							idLink="linkEstadisticasTrabajadorMenu"
+							titleLink="#{msg['menu.irEstadisticasTrabajador']}"
+							actionLink="#{navigationController.goEstadisticasTrabajadorUri()}"
+							styleClass="fa fa-line-chart icon-menu" /></li>
+					<li><ges:linkMenu ajaxLink="true"
+							idLink="linkEstadisticasEmpresaMenu"
+							titleLink="#{msg['menu.irEstadisticasEmpresa']}"
+							actionLink="#{navigationController.goEstadisticasEmpresaUri()}"
+							styleClass="fa fa-bar-chart icon-menu" /></li>
+					<li><ges:linkMenu ajaxLink="true"
+							idLink="linkEstadisticasUsuarioMenu"
+							titleLink="#{msg['menu.irEstadisticasUsuario']}"
+							actionLink="#{navigationController.goEstadisticasUsuarioUri()}"
+							styleClass="fa fa-area-chart icon-menu" /></li>
+					<c:if test="#{sessionController.isAdminRol()}">
+						<li><ges:linkMenu ajaxLink="true" idLink="linkUsuariosMenu"
+								titleLink="#{msg['menu.irUsuarios']}"
+								actionLink="#{navigationController.goUsuariosUri()}"
+								styleClass="fa fa-user-secret icon-menu" /></li>
+					</c:if>
+					<li><ges:linkMenu ajaxLink="true" idLink="linkAyudaMenu"
+							titleLink="#{msg['menu.irAyuda']}"
+							actionLink="#{navigationController.goAyudaUri()}"
+							styleClass="fa fa-question icon-menu" /></li>
+					<li><ges:linkMenu ajaxLink="true" idLink="linkMejorasMenu"
+							titleLink="#{msg['menu.irMejoras']}"
+							actionLink="#{navigationController.goMejorasUri()}"
+							styleClass="fa fa-dollar icon-menu" /></li>
+					<li><ges:linkMenu ajaxLink="true" idLink="linkAcercaMenu"
+							titleLink="#{msg['menu.irAcerca']}"
+							actionLink="#{navigationController.goAcercaUri()}"
+							styleClass="fa fa-exclamation icon-menu" /></li>
+				</ul>
+			</h:form>
+		</p:panel>
+	</aside>
+</ui:composition>

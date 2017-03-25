@@ -1,0 +1,229 @@
+<ui:composition template="/views/pages/layout/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:sec="http://www.springframework.org/security/tags"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ges="http://java.sun.com/jsf/composite/components"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="title">
+		<h:outputText value="#{msg['titulo.home']}" />
+	</ui:define>
+	<ui:define name="content">
+		<f:event listener="#{sessionController.comprubaLoginListener()}"
+			type="preRenderView" />
+		<div class="ui-grid ui-grid-responsive ui-fluid">
+			<div class="ui-grid-col-12 margin-bottom">
+				<p:panel header="#{msg['home.bienbenido']}" style="width:85% !important;">
+					<p><h:outputText value="#{msg['home.bienbenido2']}"/></p>
+				</p:panel>
+			</div>
+			<div class="ui-grid-col-12">
+				<div class="small-box font-white bg-yellow">
+					<div class="inner-small-box">
+						<h1>
+							<h:outputText value="#{msg['menu.Empresa']}" />
+						</h1>
+
+					</div>
+					<div class="icon-small-box">
+						<i class="fa fa-briefcase"></i>
+					</div>
+					<div class="container-link-small-box">
+						<ges:linkMenu ajaxLink="true" idLink="linkEmpresa"
+							titleLink="#{msg['menu.irEmpresa']}"
+							valueLink="#{msg['menu.irEmpresa']}"
+							actionLink="#{navigationController.goEmpresaUri()}"
+							styleClass="link-small-box font-white font-montserrat" />
+					</div>
+				</div>
+				<div class="small-box font-white bg-cyan">
+					<div class="inner-small-box">
+						<h1>
+							<h:outputText value="#{msg['menu.trabajadores']}" />
+						</h1>
+
+					</div>
+					<div class="icon-small-box">
+						<i class="fa fa-users"></i>
+					</div>
+					<div class="container-link-small-box">
+						<ges:linkMenu ajaxLink="true" idLink="linkTraba"
+							titleLink="#{msg['menu.irTrabajadores']}"
+							valueLink="#{msg['menu.irTrabajadores']}"
+							actionLink="#{navigationController.goTrabajadorUri()}"
+							styleClass="link-small-box font-white font-montserrat" />
+					</div>
+				</div>
+				<div class="small-box font-white bg-green">
+					<div class="inner-small-box">
+						<h1>
+							<h:outputText value="#{msg['menu.Cuenta']}" />
+						</h1>
+
+					</div>
+					<div class="icon-small-box">
+						<i class="fa fa-user"></i>
+					</div>
+					<div class="container-link-small-box">
+						<ges:linkMenu ajaxLink="true" idLink="linkCuenta"
+							returnAction="true"
+							controller="#{sessionController}"
+							titleLink="#{msg['menu.irCuenta']}"
+							valueLink="#{msg['menu.irCuenta']}"
+							actionLink="#{navigationController.goCuentaUri()}"
+							styleClass="link-small-box font-white font-montserrat" />
+					</div>
+				</div>
+				<div class="small-box font-white bg-salmon">
+					<div class="inner-small-box">
+						<h1>
+							<h:outputText value="#{msg['menu.Jornadas']}" />
+						</h1>
+
+					</div>
+					<div class="icon-small-box">
+						<i class="fa fa-calendar"></i>
+					</div>
+					<div class="container-link-small-box">
+						<ges:linkMenu ajaxLink="true" idLink="linkJornada"
+							titleLink="#{msg['menu.irJornadas']}"
+							valueLink="#{msg['menu.irJornadas']}"
+							actionLink="#{navigationController.goJornadasUri()}"
+							styleClass="link-small-box font-white font-montserrat" />
+					</div>
+				</div>
+				<div class="small-box font-white bg-fire">
+					<div class="inner-small-box">
+						<h1>
+							<h:outputText value="#{msg['menu.EstadisticasTrabajador']}" />
+						</h1>
+
+					</div>
+					<div class="icon-small-box">
+						<i class="fa fa-line-chart"></i>
+					</div>
+					<div class="container-link-small-box">
+						<ges:linkMenu ajaxLink="true" idLink="linkEstadisticasTrabajador"
+							titleLink="#{msg['menu.irEstadisticasTrabajador']}"
+							valueLink="#{msg['menu.irEstadisticasTrabajador']}"
+							actionLink="#{navigationController.goEstadisticasTrabajadorUri()}"
+							styleClass="link-small-box font-white font-montserrat" />
+					</div>
+				</div>
+				<div class="small-box font-white bg-orangered">
+					<div class="inner-small-box">
+						<h1>
+							<h:outputText value="#{msg['menu.EstadisticasEmpresa']}" />
+						</h1>
+
+					</div>
+					<div class="icon-small-box">
+						<i class="fa fa-bar-chart"></i>
+					</div>
+					<div class="container-link-small-box">
+						<ges:linkMenu ajaxLink="true" idLink="linkEstadisticasEmpresa"
+							titleLink="#{msg['menu.irEstadisticasEmpresa']}"
+							valueLink="#{msg['menu.irEstadisticasEmpresa']}"
+							actionLink="#{navigationController.goEstadisticasEmpresaUri()}"
+							styleClass="link-small-box font-white font-montserrat" />
+					</div>
+				</div>
+				<div class="small-box font-white bg-rosybrown">
+					<div class="inner-small-box">
+						<h1>
+							<h:outputText value="#{msg['menu.EstadisticasUsuario']}" />
+						</h1>
+
+					</div>
+					<div class="icon-small-box">
+						<i class="fa fa-area-chart"></i>
+					</div>
+					<div class="container-link-small-box">
+						<ges:linkMenu ajaxLink="true" idLink="linkEstadisticasUsuario"
+							titleLink="#{msg['menu.irEstadisticasUsuario']}"
+							valueLink="#{msg['menu.irEstadisticasUsuario']}"
+							actionLink="#{navigationController.goEstadisticasUsuarioUri()}"
+							styleClass="link-small-box font-white font-montserrat" />
+					</div>
+				</div>
+				<c:if test="#{sessionController.isAdminRol()}">
+					<div class="small-box font-white bg-royalblue">
+						<div class="inner-small-box">
+							<h1>
+								<h:outputText value="#{msg['menu.Usuarios']}" />
+							</h1>
+
+						</div>
+						<div class="icon-small-box">
+							<i class="fa fa-user-secret"></i>
+						</div>
+						<div class="container-link-small-box">
+							<ges:linkMenu ajaxLink="true" idLink="linkUsuarios"
+								titleLink="#{msg['menu.irUsuarios']}"
+								valueLink="#{msg['menu.irUsuarios']}"
+								actionLink="#{navigationController.goUsuariosUri()}"
+								styleClass="link-small-box font-white font-montserrat" />
+						</div>
+					</div>
+				</c:if>
+				<div class="small-box font-white bg-violet">
+					<div class="inner-small-box">
+						<h1>
+							<h:outputText value="#{msg['menu.Ayuda']}" />
+						</h1>
+
+					</div>
+					<div class="icon-small-box">
+						<i class="fa fa-question"></i>
+					</div>
+					<div class="container-link-small-box">
+						<ges:linkMenu ajaxLink="true" idLink="linkAyuda"
+							titleLink="#{msg['menu.irAyuda']}"
+							valueLink="#{msg['menu.irAyuda']}"
+							actionLink="#{navigationController.goAyudaUri()}"
+							styleClass="link-small-box font-white font-montserrat" />
+					</div>
+				</div>
+				<div class="small-box font-white bg-yellowgreen">
+					<div class="inner-small-box">
+						<h1>
+							<h:outputText value="#{msg['menu.Mejoras']}" />
+						</h1>
+
+					</div>
+					<div class="icon-small-box">
+						<i class="fa fa-dollar"></i>
+					</div>
+					<div class="container-link-small-box">
+						<ges:linkMenu ajaxLink="true" idLink="linkMejoras"
+							titleLink="#{msg['menu.irMejoras']}"
+							valueLink="#{msg['menu.irMejoras']}"
+							actionLink="#{navigationController.goMejorasUri()}"
+							styleClass="link-small-box font-white font-montserrat" />
+					</div>
+				</div>
+				<div class="small-box font-white bg-red">
+					<div class="inner-small-box">
+						<h1>
+							<h:outputText value="#{msg['menu.Acerca']}" />
+						</h1>
+
+					</div>
+					<div class="icon-small-box">
+						<i class="fa fa-exclamation"></i>
+					</div>
+					<div class="container-link-small-box">
+						<ges:linkMenu ajaxLink="true" idLink="linkAcerca"
+							titleLink="#{msg['menu.irAcerca']}"
+							valueLink="#{msg['menu.irAcerca']}"
+							actionLink="#{navigationController.goAcercaUri()}"
+							styleClass="link-small-box font-white font-montserrat" />
+					</div>
+				</div>
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>

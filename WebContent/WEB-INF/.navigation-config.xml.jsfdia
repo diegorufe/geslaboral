@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PROCESS model-entity="JSFProcess">
+ <PROCESS-ITEM NAME="rules:#views#pages#login.xhtml"
+  PATH="/views/pages/login.xhtml" SHAPE="320,33,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#views#pages#login.xhtml:0" NAME="item"
+   PATH="/views/pages/login.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="succes::#views#pages#home.xhtml"
+    NAME="output" PATH="/views/pages/home.xhtml"
+    TARGET="rules:#views#pages#home.xhtml" TITLE="succes" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="error::#views#pages#login.xhtml"
+    NAME="output1" PATH="/views/pages/login.xhtml"
+    TARGET="rules:#views#pages#login.xhtml" TITLE="error" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="registrarsesucces::#views#pages#usuario#login.xhtml"
+    NAME="output2" PATH="/views/pages/usuario/login.xhtml"
+    TARGET="rules:#views#pages#usuario#login.xhtml"
+    TITLE="registrarsesucces" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="registrarseerror::#views#pages#usuario#login.xhtml"
+    NAME="output3" PATH="/views/pages/usuario/login.xhtml"
+    TARGET="rules:#views#pages#usuario#login.xhtml"
+    TITLE="registrarseerror" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#" PATH="/" SHAPE="48,17,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#:0" NAME="item" PATH="/" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="login::#views#pages#login.xhtml"
+    NAME="output" PATH="/views/pages/login.xhtml"
+    TARGET="rules:#views#pages#login.xhtml" TITLE="login" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="home::#views#pages#home.xhtml"
+    NAME="output1" PATH="/views/pages/home.xhtml"
+    TARGET="rules:#views#pages#home.xhtml" TITLE="home" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#views#pages#redirect.xhtml"
+  PATH="/views/pages/redirect.xhtml" SHAPE="48,193,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#views#pages#redirect.xhtml:0" NAME="item"
+   PATH="/views/pages/redirect.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="login::#views#pages#login.xhtml"
+    NAME="output" PATH="/views/pages/login.xhtml"
+    TARGET="rules:#views#pages#login.xhtml" TITLE="login" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="home::#views#pages#home.xhtml"
+    NAME="output1" PATH="/views/pages/home.xhtml"
+    TARGET="rules:#views#pages#home.xhtml" TITLE="home" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#views#pages#home.xhtml"
+  PATH="/views/pages/home.xhtml" SHAPE="560,17,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#views#pages#usuario#login.xhtml"
+  PATH="/views/pages/usuario/login.xhtml" SHAPE="560,225,0,0" model-entity="JSFProcessGroup"/>
+</PROCESS>

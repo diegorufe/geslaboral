@@ -1,0 +1,7 @@
+.icon-traba{
+	background-image: url("#{resource['images/trabajadores.png']}") !important;
+	margin-right: 2px;
+}
+.icon-menu{
+	text-decoration: none !important;
+}

@@ -1,0 +1,55 @@
+<ui:composition template="/views/pages/layout/templateSchedule.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:sec="http://www.springframework.org/security/tags"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ges="http://java.sun.com/jsf/composite/components"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="title">
+		<h:outputText value="#{msg['jornadas.header']}" />
+	</ui:define>
+	<ui:define name="content">
+		<h:form id="formJornadas">
+			<p:growl id="jornadaGrowl" showDetail="false" sticky="true" />
+			<p:panel header="Filtros" styleClass="panelFiltros margin-bottom1 panelFiltros-width"
+				id="panelFiltrosJornada" toggleable="true">
+				<p:panelGrid styleClass="grid-user no-boder" columns="1"
+					layout="grid">
+					<ges:labelGenerico
+						forComponent="formJornadas:trabajadorDiv:divTextSel:selTrabajadorText"
+						styleClass="font-montserrat" value="#{msg['jornada.trabajador']}" />
+					<ges:textButtonSel id="trabajadorDiv" idText="selTrabajadorText"
+						styleClass="selInputTrabaJornaInput"
+						styleClassBtnAdd="selInputTrabaJornaAdd"
+						styleClassBtnDel="selInputTrabaJornaDel"
+						idDivText="divTextSel"
+						value="#{jornadaController.trabajadorFiltro.codigo}"
+						type="trabajador" update=":trabajadorDiv2:TrabajadorSel2"
+						controller="#{selTrabajadorController}" />
+					<ges:buttonGenerico ajaxButtonGenerico="false"
+						valueButtonGenerico="#{msg['aplicar']}"
+						typeButtonGenerico="submit"
+						actionButtonGenerico="#{jornadaController.aplicarFiltros}" />
+				</p:panelGrid>
+			</p:panel>
+			<h:outputScript library="js" name="schedule_languaje.js" />
+			<p:panel id="jornadasSchedule">
+				<p:schedule   showWeekNumbers="true" timeZone="Europe/Madrid"
+					clientTimeZone="Europe/Madrid"
+					style="width:95%;margin-left:3.5em;margin-top:3.5em;"
+					id="calendarJornadas" value="#{jornadaController.eventModel}"
+					draggable="false"
+					resizable="false" widgetVar="jornadas"
+					locale="#{idiomaController.locale.language}">
+					<p:ajax event="dateSelect"
+						listener="#{jornadaController.onDateSelect}" update="jornadaAbm" />
+					<p:ajax event="eventSelect"
+						listener="#{jornadaController.onEventSelect}" />
+				</p:schedule>
+			</p:panel>
+		</h:form>
+		<ui:include src="/views/pages/jornada/abmJornada.xhtml"></ui:include>
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,81 @@
+<ui:composition template="/views/pages/layout/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:sec="http://www.springframework.org/security/tags"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ges="http://java.sun.com/jsf/composite/components"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="title">
+		<h:outputText value="#{msg['empresa.header']}" />
+	</ui:define>
+	<ui:define name="content">
+		<div class="ui-grid ui-grid-responsive ui-fluid">
+			<div class="ui-grid-col-12">
+				<h:form id="formEmpresas">
+					<p:panel header="Filtros" styleClass="panelFiltros margin-bottom1 panelFiltros-width"
+						id="panelFiltrosJornada" toggleable="true">
+						<p:panelGrid styleClass="grid-user no-boder" columns="1"
+							layout="grid">
+							<ges:labelGenerico
+								forComponent="formEmpresas:codigoDiv:codigoInput"
+								styleClass="font-montserrat"
+								value="#{msg['empresa.codigo']}" />
+							<ges:inputTextGenerico id="codigoDiv"
+								value="#{empresaController.filtroCodigo}" idInput="codigoInput"
+								max="10" />
+							<ges:labelGenerico
+								forComponent="formEmpresas:nombreDiv:nombreInput"
+								styleClass="font-montserrat"
+								value="#{msg['empresa.nombre']}" />
+							<ges:inputTextGenerico id="nombreDiv"
+								value="#{empresaController.filtroNombre}" idInput="nombreInput"
+								max="50"  />
+							<ges:buttonGenerico ajaxButtonGenerico="false"
+								valueButtonGenerico="#{msg['aplicar']}"
+								typeButtonGenerico="submit"
+								actionButtonGenerico="#{empresaController.aplicarFiltros}" />
+						</p:panelGrid>
+					</p:panel>
+					<table class="amb">
+						<tr>
+							<p:growl id="accionesAbmEmpresa" sticky="true" />
+							<td><ges:buttonShow
+									actionButton='#{empresaController.actionGoShow}'
+									updateButton="formEmpresas:accionesAbmEmpresa" /></td>
+							<td><ges:buttonAdd
+									actionButton='#{empresaController.actionGoAdd}'
+									updateButton="formEmpresas:accionesAbmEmpresa" /></td>
+							<td><ges:buttonEdit
+									actionButton='#{empresaController.actionGoMod}'
+									updateButton="formEmpresas:accionesAbmEmpresa" /></td>
+							<td><ges:buttonRemove
+									actionButton='#{empresaController.actionGoDel}'
+									updateButton="formEmpresas:accionesAbmEmpresa" /> <p:confirmDialog
+									id="delEmpresa" closable="true" closeOnEscape="true"
+									height="30" message="#{msg['seguro.borrar']}"
+									header="#{msg['borrar.registro']}" severity="alert"
+									widgetVar="delEmpresa">
+									<table style="margin: 0 auto !important;">
+										<tr>
+											<td><ges:buttonAccept
+													actionButton="#{empresaController.delModel}"
+													updateButton="formEmpresas:accionesAbmEmpresa,formEmpresas:delEmpresa,:formEmpresas:empresas:empresasTable" /></td>
+											<td><ges:buttonCancel
+													updateButton="formEmpresas:delEmpresa"
+													onClick="PF('delEmpresa').hide()" /></td>
+										</tr>
+									</table>
+								</p:confirmDialog></td>
+						</tr>
+					</table>
+					<ges:dataTableGenerico id="empresas" idTable="empresasTable"
+						lazyTable="#{empresaController.lazyTable}" selectionMode="single" />
+				</h:form>
+			</div>
+		</div>
+		<ui:include src="/views/pages/empresa/abmEmpresa.xhtml"></ui:include>
+	</ui:define>
+</ui:composition>

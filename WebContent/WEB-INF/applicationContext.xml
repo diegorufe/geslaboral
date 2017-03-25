@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/context  http://www.springframework.org/schema/context/spring-context-3.2.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd">
+	<!-- Enable Spring Annotation Configuration -->
+	<context:annotation-config />
+	<!-- Scan for all of Spring components such as Spring Service -->
+	<context:component-scan base-package="com.gesLaboral"></context:component-scan>
+
+	<!-- Necessary to get the entity manager injected into the factory bean -->
+	<bean
+		class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
+
+	<!-- Define Hibernate JPA Vendor Adapter -->
+	<bean id="jpaVendorAdapter"
+		class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+		<property name="databasePlatform" value="org.hibernate.dialect.MySQLDialect" />
+	</bean>
+
+	<!-- Entity Manager Factory -->
+	<bean id="entityManagerFactory"
+		class="org.springframework.orm.jpa.LocalEntityManagerFactoryBean">
+		<property name="persistenceUnitName" value="GESLABORAL" />
+	</bean>
+	<!-- Spring security -->
+	<bean id="UserAutenticaionService" name="userAutenticaionService"
+		class="com.gesLaboral.maestros.usuarios.serviceImpl.UserAutenticaionService"
+		abstract="false" lazy-init="false">
+		<property name="usuarioDao" ref="usuarioDao" />
+		<property name="rolDao" ref="rolDao" />
+	</bean>
+	<bean id="CustomAuthenticationProvider"
+		class="com.gesLaboral.maestros.usuarios.providers.CustomAuthenticationProvider"
+		abstract="false" lazy-init="false">
+		<property name="userAutenticaionService" ref="userAutenticaionService" />
+	</bean>
+	<!-- Service -->
+	<bean name="usuarioService"
+		class="com.gesLaboral.maestros.usuarios.serviceImpl.UsuarioServiceImpl">
+		<property name="dao" ref="usuarioDao" />
+	</bean>
+	<bean name="rolService"
+		class="com.gesLaboral.maestros.usuarios.serviceImpl.RolServiceImpl">
+		<property name="dao" ref="rolDao" />
+	</bean>
+	<bean name="empresaService"
+		class="com.gesLaboral.maestros.empresas.serviceImpl.EmpresaServiceImpl">
+		<property name="dao" ref="empresaDao" />
+	</bean>
+	<bean name="trabajadorService"
+		class="com.gesLaboral.maestros.trabajadores.serviceImpl.TrabajadorServiceImpl">
+		<property name="dao" ref="trabajadorDao" />
+	</bean>
+	<bean name="jornadaService"
+		class="com.gesLaboral.maestros.jornadas.serviceImpl.JornadaServiceImpl">
+		<property name="dao" ref="jornadaDao" />
+	</bean>
+	<!-- Dao -->
+	<bean id="usuarioDao" class="com.gesLaboral.maestros.usuarios.daoImpl.UsuarioDaoImpl"
+		abstract="false" lazy-init="false">
+		<property name="entityManagerFactory" ref="entityManagerFactory" />
+	</bean>
+	<bean id="rolDao" class="com.gesLaboral.maestros.usuarios.daoImpl.RolDaoImpl"
+		abstract="false" lazy-init="false">
+		<property name="entityManagerFactory" ref="entityManagerFactory" />
+	</bean>
+	<bean id="empresaDao" class="com.gesLaboral.maestros.empresas.daoImpl.EmpresaDaoImpl"
+		abstract="false" lazy-init="false">
+		<property name="entityManagerFactory" ref="entityManagerFactory" />
+	</bean>
+	<bean id="trabajadorDao"
+		class="com.gesLaboral.maestros.trabajadores.daoImpl.TrabajadorDaoImpl"
+		abstract="false" lazy-init="false">
+		<property name="entityManagerFactory" ref="entityManagerFactory" />
+	</bean>
+	<bean id="jornadaDao" class="com.gesLaboral.maestros.jornadas.daoImpl.JornadaDaoImpl"
+		abstract="false" lazy-init="false">
+		<property name="entityManagerFactory" ref="entityManagerFactory" />
+	</bean>
+	<!-- Transaction Manager -->
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactory" />
+	</bean>
+
+
+	<!-- Detect @Transactional -->
+	<tx:annotation-driven transaction-manager="transactionManager" />
+	<!-- <import resource="spring-security.xml" /> -->
+	
+	<bean id="logoutSuccessHandler" class="com.gesLaboral.maestros.usuarios.handler.LogoutHandler"/>
+
+</beans>

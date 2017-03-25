@@ -1,0 +1,64 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pm="http://primefaces.org/mobile"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:composite="http://java.sun.com/jsf/composite">
+
+	<composite:interface>
+		<composite:attribute name="onSelect" 
+			method-signature="void actionListener(org.primefaces.event.SelectEvent)" required="false" />
+		<composite:attribute name="tipeTable" default="G" required="false" />	
+		<composite:attribute name="idTable" required="false"
+			default="lazyTable" />
+		<composite:attribute name="updateTipeTable" required="false"
+			default="" />	
+		<composite:attribute name="lazyTable" required="true" />
+		<composite:attribute name="paginator" required="false" default="false" />
+		<composite:attribute name="paginatorTemplate" required="false"
+			default="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}" />
+		<composite:attribute name="rowsPageTemplate" required="false"
+			default="5,10,15" />
+		<composite:attribute name="selectionMode" required="false"
+			default="single" />
+	</composite:interface>
+
+	<composite:implementation>
+
+		<p:dataTable var="tmp" paginator="#{cc.attrs.lazyTable.paginator}"
+			lazy="true" rows="#{cc.attrs.lazyTable.rowsPage}"
+			rowKey="#{tmp.toString()}"
+			reflow="#{cc.attrs.lazyTable.reflow}"
+			paginatorTemplate="#{cc.attrs.paginatorTemplate}"
+			rowsPerPageTemplate="#{cc.attrs.rowsPageTemplate}"
+			draggableColumns="true" resizableColumns="true"
+			selectionMode="#{cc.attrs.selectionMode}" paginatorPosition="bottom"
+			sortMode="multiple" emptyMessage="#{msg['generico.lazy.empty']}"
+			draggableRows="true" selection="#{cc.attrs.lazyTable.selection}" id="#{cc.attrs.idTable}"
+			value="#{cc.attrs.lazyTable}">
+			
+			<!-- Table select  -->
+			<c:if test="#{cc.attrs.tipeTable == 'S'}">
+				<p:ajax event="rowDblselect" listener="#{cc.attrs.onSelect}" 
+   					 update="#{cc.attrs.updateTipeTable}" global="false" partialSubmit="true" immediate="true" />
+			</c:if>
+
+			<f:facet name="header">
+				<h:outputText value="#{msg[cc.attrs.lazyTable.header]}" />
+			</f:facet>
+
+			<p:columns value="#{cc.attrs.lazyTable.columns}" var="column"
+				toggleable="true"
+				sortBy="#{tmp[column.sorter]}">
+				<f:facet name="header">
+					<h:outputText value="#{msg[column.header]}" />
+				</f:facet>
+				<h:outputText value="#{tmp[column.property]}" />
+			</p:columns>
+
+		</p:dataTable>
+	</composite:implementation>
+
+</ui:composition>

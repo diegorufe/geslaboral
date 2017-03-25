@@ -1,0 +1,67 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pm="http://primefaces.org/mobile"
+	xmlns:ges="http://java.sun.com/jsf/composite/components"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:composite="http://java.sun.com/jsf/composite">
+	<composite:interface>
+		<composite:attribute name="panelId" default="panelIdSelect"
+			required="false" />
+		<composite:attribute name="value" default="" required="false" />
+		<composite:attribute name="type" default="" required="false" />
+		<composite:attribute name="update" default="" required="false" />
+		<composite:attribute name="styleClass" default="" required="false" />
+		<composite:attribute name="styleClassBtnAdd" default=""
+			required="false" />
+		<composite:attribute name="styleClassBtnDel" default=""
+			required="false" />
+		<composite:attribute name="disabledButtons" default="false"
+			required="false" />
+		<composite:attribute name="idText" default="-9999" required="false" />
+		<composite:attribute name="idDivText" default="-9999" required="false" />
+		<composite:attribute name="controller" default="" required="false" />
+		<composite:attribute name="dynamic" default="" required="false" />
+	</composite:interface>
+	<composite:implementation>
+		<p:panelGrid styleClass="grid-user no-boder" columns="3"
+			id="#{cc.attrs.panelId}" layout="grid">
+			<ges:inputTextGenerico id="#{cc.attrs.idDivText}"
+				idInput="#{cc.attrs.idText}" max="10"
+				styleClass="selStyleInput font-montserrat #{cc.attrs.styleClass}"
+				requiered="true" disabled="true" value="#{cc.attrs.value}" />
+			<p:commandButton ajax="true" icon="fa fa-fw fa-search-plus"
+				styleClass="selStyleButton selStyleButtonAdd font-montserrat #{cc.attrs.styleClassBtnAdd}"
+				action="#{cc.attrs.controller.addEntidad}"
+				disabled="#{cc.attrs.disabledButtons}" />
+			<p:commandButton ajax="true" icon="fa fa-fw fa-eraser"
+				styleClass="selStyleButton selStyleButtonDel font-montserrat #{cc.attrs.styleClassBtnDel}"
+				disabled="#{cc.attrs.disabledButtons}"
+				action="#{cc.attrs.controller.delEntidad}" />
+		</p:panelGrid>
+		<c:choose>
+			<c:when test="#{cc.attrs.type == 'empresa'}">
+				<ges:selEmpresa id="selEmpresaCont" idSel="selEmpresaDiv"
+					dynamic="#{cc.attrs.dynamic}" controller="#{cc.attrs.controller}"
+					update="#{cc.attrs.update}" />
+			</c:when>
+			<c:when test="#{cc.attrs.type == 'estadisticaEmpresa'}">
+				<ges:selEmpresa id="selEmpresaCont" idSel="selEmpresaDiv"
+					dynamic="#{cc.attrs.dynamic}" controller="#{cc.attrs.controller}"
+					update="#{cc.attrs.update}" />
+			</c:when>
+			<c:when test="#{cc.attrs.type == 'trabajador'}">
+				<ges:selTrabajador id="selTrabajadorCont" idSel="selTrabajadorDiv"
+					dynamic="#{cc.attrs.dynamic}" controller="#{cc.attrs.controller}"
+					update="#{cc.attrs.update}" />
+			</c:when>
+			<c:when test="#{cc.attrs.type == 'estadisticaTrabajador'}">
+				<ges:selTrabajador id="selTrabajadorCont" idSel="selTrabajadorDiv"
+					dynamic="#{cc.attrs.dynamic}" controller="#{cc.attrs.controller}"
+					update="#{cc.attrs.update}" />
+			</c:when>
+		</c:choose>
+	</composite:implementation>
+</ui:composition>

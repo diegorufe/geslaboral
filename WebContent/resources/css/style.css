@@ -1,0 +1,205 @@
+html {
+	height: 100% !important;
+	width: 100%;
+}
+
+body {
+	min-height: 100% !important;
+	height: 100% !important;
+	margin: 0px;
+	background: #ebeced !important;
+}
+
+.font-montserrat {
+	font-family: monserrat !important;
+}
+
+#wrap {
+	min-height: 100% !important;
+	height: 100% !important;
+	/* Negative indent footer by its height */
+	margin: 0 auto -60px;
+	/* Pad bottom by footer height */
+	padding: 0 0 60px;
+}
+/* Small box */
+.small-box {
+	width: 20em !important;
+	border-radius: 2px;
+	position: relative;
+	float: left;
+	display: block;
+	margin-bottom: 20px;
+	margin-right: 10px;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+	background: none !important;
+}
+
+.small-box .inner-small-box {
+	padding: 10px;
+}
+
+.small-box .inner-small-box {
+	padding: 10px;
+}
+
+.small-box .icon-small-box {
+	transition: all .3s linear;
+	position: absolute;
+	top: -12px;
+	right: 10px;
+	z-index: 0;
+	font-size: 90px;
+	margin-top: 0.15em;
+	color: rgba(0, 0, 0, 0.15);
+}
+
+.small-box .container-link-small-box {
+	background: rgba(0, 0, 0, 0.15) !important;
+	text-decoration: none !important;
+	width: 100%;
+	text-align: center;
+}
+
+.small-box .link-small-box {
+	width: 100%;
+	text-decoration: none !important;
+}
+/*Generics*/
+.bg-yellow {
+	background-color: #f39c12 !important;
+}
+
+.font-white {
+	color: white !important;
+}
+
+.full-heigth {
+	min-height: 100% !important;
+	height: 100% !important;
+}
+
+.bg-cyan {
+	background-color: #00c0ef !important;
+}
+
+.bg-green {
+	background-color: #00a65a !important;
+}
+
+.text-align-left {
+	text-align: left;
+}
+
+.panelFiltrosSchedule {
+	max-width: 400px;
+	margin-right: 200px;
+	margin-top: 50px;
+	margin-left: 50px;
+}
+
+.panelFiltrosSchedule input {
+/* 	margin-left: -10px !important; */
+}
+
+.margin-bottom {
+	margin-bottom: 3em !important;
+}
+
+.bg-salmon {
+	background-color: #E9967A !important;
+}
+
+.bg-fire {
+	background-color: #B22222 !important;
+}
+
+.bg-orangered {
+	background-color: #FF4500 !important;
+}
+
+.bg-rosybrown {
+	background-color: #BC8F8F !important;
+}
+
+.bg-royalblue {
+	background-color: #4169E1 !important;
+}
+
+.bg-violet {
+	background-color: #EE82EE !important;
+}
+
+.bg-red {
+	background-color: #FF0000 !important;
+}
+
+.bg-yellowgreen {
+	background-color: #9ACD32 !important;
+}
+
+.panelFiltros-width {
+	max-width: 340px !important;
+}
+
+.bg-backColor-all {
+	background: #ebeced !important;
+}
+
+.margin-bottom1 {
+	margin-bottom: 1em !important;
+}
+
+.jornadas-TR {
+	background-color: #7FFFD4 !important;
+}
+
+.jornadas-EN {
+	background-color: #9932CC !important;
+}
+
+.jornadas-FE {
+	background-color: #FF0000 !important;
+}
+
+.jornadas-PA {
+	background-color: #87CEEB !important;
+}
+
+.jornadas-MA {
+	background-color: #DB7093 !important;
+}
+
+.jornadas-HU {
+	background-color: #FF8C00 !important;
+}
+
+.jornadas-VA {
+	background-color: #32CD32 !important;
+}
+
+.jornadas-AC {
+	background-color: #8B0000 !important;
+}
+
+.jornadas-AU {
+	background-color: #F0E68C !important;
+}
+
+.jornadas-PE {
+	background-color: #CD853F !important;
+}
+.fc-prev-button{
+	max-width: 60px !important;
+	width: 60px !important;
+	margin-bottom: 20px !important;
+}
+.fc-next-button{
+	max-width: 60px !important;
+	width: 60px !important;
+	float: right !important;
+	margin-bottom: 20px !important;
+}
+.fc-today-button{
+	margin-left: 0 !important;
+}

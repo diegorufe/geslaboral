@@ -1,0 +1,67 @@
+<ui:composition template="/views/pages/layout/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:sec="http://www.springframework.org/security/tags"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ges="http://java.sun.com/jsf/composite/components"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="title">
+		<h:outputText value="#{msg['estadistica.empresa']}" />
+	</ui:define>
+	<ui:define name="content">
+		<h:form id="formEstadisticas">
+			<div class="ui-grid ui-grid-responsive ui-fluid">
+				<div class="ui-grid-col-12">
+					<p:growl id="estadisiticaGrowl" showDetail="false" sticky="true" />
+					<p:panel header="Filtros" styleClass="panelFiltrosSchedule"
+						id="panelFiltrosJornada" toggleable="true">
+						<h:form id="frm">
+							<p:panelGrid styleClass="grid-user no-boder" columns="1"
+								layout="grid">
+								<ges:labelGenerico
+									forComponent="formEstadisticas:frm:empresaDiv:divTextSel:selEmpresaText"
+									styleClass="font-montserrat"
+									value="#{msg['estadistica.empresa']}" />
+								<ges:textButtonSel id="empresaDiv" idText="selEmpresaText"
+									idDivText="divTextSel"
+									value="#{estadisticaEmpresaController.empresaFiltro.codigo}"
+									type="estadisticaEmpresa" styleClass="selInputEmpreInput"
+									styleClassBtnAdd="selInputEmpreAdd"
+									styleClassBtnDel="selInputEmpreDel"
+									update=":empresaDiv2:EmpresaSel2"
+									controller="#{selEstadisticaEmpresaController}" />
+								<ges:labelGenerico
+									forComponent="formEstadisticas:frm:anioDiv:anioInput"
+									styleClass="font-montserrat"
+									value="#{msg['estadisitica.anio']}" />
+								<ges:inputTextGenerico id="anioDiv" type="number"
+									value="#{estadisticaEmpresaController.anio}"
+									idInput="anioInput" max="5" />
+								<ges:buttonGenerico ajaxButtonGenerico="false"
+									valueButtonGenerico="#{msg['aplicar']}"
+									typeButtonGenerico="submit"
+									actionButtonGenerico="#{estadisticaEmpresaController.aplicarFiltrosEmpresa}" />
+							</p:panelGrid>
+						</h:form>
+					</p:panel>
+
+				</div>
+			</div>
+			<div>
+				<br /> <br />
+			</div>
+			<div class="ui-grid ui-grid-responsive ui-fluid">
+				<div class="ui-grid-col-12">
+					<p:panelGrid columns="1">
+						<p:chart type="bar" style="width:70em;height:25em;"
+							model="#{estadisticaEmpresaController.barCharModel}"
+							responsive="true" />
+					</p:panelGrid>
+				</div>
+			</div>
+		</h:form>
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,60 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+	<composite:interface>
+		<composite:attribute name="typeButtonGenerico" 
+			required="false" />
+		<composite:attribute name="controller" 
+			required="false" />	
+		<composite:attribute name="returnAction" default="false" 
+			required="false" />		
+		<composite:attribute name="icon" default="" 
+			required="false" />	
+		<composite:attribute name="ajaxButtonGenerico" default="true"
+			required="false" />
+		<composite:attribute name="valueButtonGenerico" default=""
+			required="false" />
+		<composite:attribute name="actionButtonGenerico" default="#"
+			method-signature="java.lang.String action()" required="false" />
+		<composite:attribute name="styleClassButtonGenerico" default=""
+			required="false" />
+		<composite:attribute name="onComplete" default=""
+			required="false" />		
+			<composite:attribute name="onClick" default=""
+			required="false" />			
+		<composite:attribute name="update" default=""
+			required="false" />	
+		<composite:attribute name="growl" default=""
+			required="false" />	
+			
+		<composite:attribute name="disabled" default="false"
+			required="false" />		
+				
+	</composite:interface>
+
+	<composite:implementation>
+			<p:commandButton icon="#{cc.attrs.icon}"
+				styleClass="#{cc.attrs.styleClassButtonGenerico} buttonGenerico"
+				type="#{cc.attrs.typeButtonGenerico}"
+				value="#{cc.attrs.valueButtonGenerico}"
+				action="#{cc.attrs.actionButtonGenerico}"
+				onComplete="#{cc.attrs.onComplete}"
+				onclick="#{cc.attrs.onClick}"
+				update="#{cc.attrs.update}"
+				disabled="#{cc.attrs.disabled}"
+				ajax="#{cc.attrs.ajaxButtonGenerico}" >
+				<c:if test="#{cc.attrs.returnAction}" >
+					 <p:ajax event="dialogReturn" listener="#{cc.attrs.controller.onReturnDialog}" />
+				</c:if>	
+			</p:commandButton>	
+			<c:if test='#{cc.attrs.growl != ""}'>
+				<p:growl id="#{cc.attrs.growl}" showDetail="false" sticky="true"></p:growl>
+			</c:if>
+	</composite:implementation>
+
+</ui:composition>
