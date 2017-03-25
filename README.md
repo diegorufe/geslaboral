@@ -1,4 +1,10 @@
 
+- JAVA WEB MVC
+- HIBERNATE
+- JPA
+- PRIMEFACES
+- JSF 2.1
+- SPRING
 
 (Español)
 
